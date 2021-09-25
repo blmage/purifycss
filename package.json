@@ -30,7 +30,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/purifycss/purifycss.git"
+    "url": "https://github.com/blmage/rollup-purifycss.git"
   },
   "keywords": [
     "optimize",
