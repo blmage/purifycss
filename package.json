@@ -7,7 +7,7 @@
   "jsnext:main": "./lib/purifycss.es.js",
   "dependencies": {
     "clean-css": "^4.0.12",
-    "glob": "^7.1.1",
+    "glob": "git+https://github.com/blmage/rollup-node-glob.git#semver:^7.2.1-patch",
     "rework": "^1.0.1",
     "uglify-js": "^3.0.6",
     "yargs": "^8.0.1"
