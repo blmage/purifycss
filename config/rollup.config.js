@@ -1,36 +1,35 @@
-import babel from "rollup-plugin-babel"
-import builtins from "rollup-plugin-node-builtins"
-import commonjs from "rollup-plugin-commonjs"
-import resolve from "rollup-plugin-node-resolve"
+import babel from "@rollup/plugin-babel"
+import commonjs from "@rollup/plugin-commonjs"
+import resolve from "@rollup/plugin-node-resolve"
 
 export default {
-    entry: "src/purifycss.js",
-    targets: [
+    input: "src/purifycss.js",
+    output: [
         {
-            dest: "lib/purifycss.es.js",
+            file: "lib/purifycss.es.js",
             format: "es"
         },
         {
-            dest: "lib/purifycss.js",
-            format: "cjs"
+            file: "lib/purifycss.js",
+            format: "cjs",
+            exports: "default"
         }
     ],
     plugins: [
-        builtins(),
         resolve(),
         commonjs(),
         babel({
-          exclude: "node_modules/**",
-          presets: [
-            [
-              "es2015", {
-                "modules": false
-              }
+            babelHelpers: "bundled",
+            exclude: "node_modules/**",
+            presets:[
+                [
+                    "@babel/env",
+                    {
+                        "modules": false,
+                    }
+                ]
             ]
-          ],
-          "plugins": [ "external-helpers" ]
         })
     ],
-    external: ["clean-css", "glob", "rework", "uglifyjs"],
-    sourceMap: false
+    external: ["clean-css", "glob", "rework", "uglifyjs"]
 }
