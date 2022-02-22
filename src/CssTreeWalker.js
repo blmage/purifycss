@@ -1,5 +1,5 @@
 import { EventEmitter } from "events"
-import rework from "rework"
+import { parse, stringify } from "css"
 
 const RULE_TYPE = "rule"
 const MEDIA_TYPE = "media"
@@ -15,7 +15,8 @@ class CssTreeWalker extends EventEmitter {
     }
 
     beginReading() {
-        this.ast = rework(this.startingSource).use(this.readPlugin.bind(this))
+        this.ast = parse(this.startingSource)
+        this.readPlugin(this.ast.stylesheet)
     }
 
     readPlugin(tree) {
@@ -59,7 +60,7 @@ class CssTreeWalker extends EventEmitter {
 
     toString() {
         if (this.ast) {
-            return this.ast.toString().replace(/,\n/g, ",")
+            return stringify(this.ast).replace(/,\n/g, ",")
         }
         return ""
     }
